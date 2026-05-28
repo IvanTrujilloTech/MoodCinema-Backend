@@ -13,8 +13,13 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Middleware
-app.use(helmet());
-app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:3000' }));
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
+app.use(cors({ 
+  origin: true, // Automatically reflects the request origin, allowing any domain (CORS-bulletproof)
+  credentials: true 
+}));
 app.use(express.json());
 
 // Rate limiting
